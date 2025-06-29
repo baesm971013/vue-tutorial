@@ -1,35 +1,76 @@
 <template>
-  <div class="container">
-    <HelloUser :name="name" />
-    <input v-model="name" placeholder="이름을 입력하세요" />
+  <div class='layout'>
+    <div class='form'>
+      <input v-model="name" placeholder="이름을 입력하세요" />
+      <input v-model="company" placeholder="회사명을 입력하세요" />
+      <button @click="addUser">➕ 사용자 추가</button>
+    </div>
+    
+    <div class="info">
+       <UserCard
+        v-for="(user, index) in users"
+        :key="index"
+        :name="user.name"
+        :company="user.company"
+      />
+    </div>
   </div>
 
-    <div class="container">
-    <HelloUser :company="company" />
-    <input v-model="company" placeholder="화서 입력하세요" />
-  </div>
 
     <div class="container">
-    <BasicFlow />
-  </div>
+      <BasicFlow />
+    </div>
 </template>
 
 <script setup>
-import BasicFlow from './components/BasicFlow.vue'
-import HelloUser from './components/HelloUser.vue'
 import { ref } from 'vue'
+import BasicFlow from './components/BasicFlow.vue'
+import UserCard from './components/UserCard.vue'
 
-const name = ref('홍길동')
-const company = ref('아시아나')
+
+const name = ref('')
+const company = ref('')
+const users = ref([])
+
+function addUser(){
+  if (name.value.trim() && company.value.trim()) {
+    users.value.push({
+      name: name.value,
+      company: company.value
+    })
+    name.value = ''
+    company.value = ''
+  } else {
+    alert('이름과 회사를 모두 입력해주세요!')
+  }
+}
+
 
 </script>
 
+
 <style scoped>
-.container {
+.layout {
+  display: flex;
+  justify-content: space-between;
   padding: 30px;
-  font-family: sans-serif;
+  gap: 40px;
 }
 
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
 input {
   padding: 8px;
   font-size: 16px;
