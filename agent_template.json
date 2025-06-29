@@ -1,0 +1,989 @@
+{
+    "answer": [],
+    "components": {
+        "Answer:PoorMapsCover": {
+            "downstream": [
+                "RewriteQuestion:OrangeBottlesSwim"
+            ],
+            "obj": {
+                "component_name": "Answer",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "debug_inputs": [],
+                    "inputs": [],
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "post_answers": [],
+                    "query": []
+                }
+            },
+            "upstream": [
+                "begin",
+                "Generate:ItchyRiversDrum"
+            ]
+        },
+        "Baidu:OliveAreasCall": {
+            "downstream": [
+                "Generate:ItchyRiversDrum"
+            ],
+            "obj": {
+                "component_name": "Baidu",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "debug_inputs": [],
+                    "inputs": [],
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "query": [
+                        {
+                            "component_id": "KeywordExtract:BeigeTipsStand",
+                            "type": "reference"
+                        }
+                    ],
+                    "top_n": 2
+                }
+            },
+            "upstream": [
+                "KeywordExtract:BeigeTipsStand"
+            ]
+        },
+        "DuckDuckGo:SoftButtonsRefuse": {
+            "downstream": [
+                "Generate:ItchyRiversDrum"
+            ],
+            "obj": {
+                "component_name": "DuckDuckGo",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "channel": "text",
+                    "debug_inputs": [],
+                    "inputs": [],
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "query": [
+                        {
+                            "component_id": "KeywordExtract:BeigeTipsStand",
+                            "type": "reference"
+                        }
+                    ],
+                    "top_n": 2
+                }
+            },
+            "upstream": [
+                "KeywordExtract:BeigeTipsStand"
+            ]
+        },
+        "Generate:ItchyRiversDrum": {
+            "downstream": [
+                "Answer:PoorMapsCover"
+            ],
+            "obj": {
+                "component_name": "Generate",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "cite": true,
+                    "debug_inputs": [],
+                    "frequency_penalty": 0.7,
+                    "inputs": [],
+                    "llm_id": "deepseek-chat@DeepSeek",
+                    "max_tokens": 0,
+                    "message_history_window_size": 12,
+                    "output": null,
+                    "output_var_name": "output",
+                    "parameters": [],
+                    "presence_penalty": 0.4,
+                    "prompt": "Role: You are an intelligent assistant. \nTask: Chat with user. Answer the question based on the provided content from: Knowledge Base, Wikipedia, Duckduckgo, Baidu.\nRequirements:\n  - Answer should be in markdown format.\n - Answer should include all sources(Knowledge Base, Wikipedia, Duckduckgo, Baidu) as long as they are relevant, and label the sources of the cited content separately.\n  - Attach URL links to the content which is quoted from Wikipedia, DuckDuckGo or Baidu.\n  - Do not make thing up when there's no relevant information to user's question. \n\n## Knowledge base content\n{Retrieval:SilentCamelsStick}\n\n\n## Wikipedia content\n{Wikipedia:WittyRiceLearn}\n\n\n## Duckduckgo content\n{DuckDuckGo:SoftButtonsRefuse}\n\n\n## Baidu content\n{Baidu:OliveAreasCall}\n\n",
+                    "query": [],
+                    "temperature": 0.1,
+                    "top_p": 0.3
+                }
+            },
+            "upstream": [
+                "Retrieval:SilentCamelsStick",
+                "Wikipedia:WittyRiceLearn",
+                "Baidu:OliveAreasCall",
+                "DuckDuckGo:SoftButtonsRefuse"
+            ]
+        },
+        "KeywordExtract:BeigeTipsStand": {
+            "downstream": [
+                "Baidu:OliveAreasCall",
+                "DuckDuckGo:SoftButtonsRefuse",
+                "Wikipedia:WittyRiceLearn"
+            ],
+            "obj": {
+                "component_name": "KeywordExtract",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "cite": true,
+                    "debug_inputs": [],
+                    "frequencyPenaltyEnabled": true,
+                    "frequency_penalty": 0.7,
+                    "inputs": [],
+                    "llm_id": "deepseek-chat@DeepSeek",
+                    "maxTokensEnabled": true,
+                    "max_tokens": 256,
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "parameter": "Precise",
+                    "parameters": [],
+                    "presencePenaltyEnabled": true,
+                    "presence_penalty": 0.4,
+                    "prompt": "",
+                    "query": [],
+                    "temperature": 0.1,
+                    "temperatureEnabled": true,
+                    "topPEnabled": true,
+                    "top_n": 2,
+                    "top_p": 0.3
+                }
+            },
+            "upstream": [
+                "RewriteQuestion:OrangeBottlesSwim"
+            ]
+        },
+        "Retrieval:SilentCamelsStick": {
+            "downstream": [
+                "Generate:ItchyRiversDrum"
+            ],
+            "obj": {
+                "component_name": "Retrieval",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "debug_inputs": [],
+                    "empty_response": "The answer you want was not found in the knowledge base!",
+                    "inputs": [],
+                    "kb_ids": [],
+                    "keywords_similarity_weight": 0.3,
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "query": [],
+                    "rerank_id": "",
+                    "similarity_threshold": 0.2,
+                    "top_k": 1024,
+                    "top_n": 8
+                }
+            },
+            "upstream": [
+                "RewriteQuestion:OrangeBottlesSwim"
+            ]
+        },
+        "RewriteQuestion:OrangeBottlesSwim": {
+            "downstream": [
+                "KeywordExtract:BeigeTipsStand",
+                "Retrieval:SilentCamelsStick"
+            ],
+            "obj": {
+                "component_name": "RewriteQuestion",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "cite": true,
+                    "debug_inputs": [],
+                    "frequencyPenaltyEnabled": true,
+                    "frequency_penalty": 0.7,
+                    "inputs": [],
+                    "llm_id": "deepseek-chat@DeepSeek",
+                    "loop": 1,
+                    "maxTokensEnabled": true,
+                    "max_tokens": 256,
+                    "message_history_window_size": 6,
+                    "output": null,
+                    "output_var_name": "output",
+                    "parameter": "Precise",
+                    "parameters": [],
+                    "presencePenaltyEnabled": true,
+                    "presence_penalty": 0.4,
+                    "prompt": "",
+                    "query": [],
+                    "temperature": 0.1,
+                    "temperatureEnabled": true,
+                    "topPEnabled": true,
+                    "top_p": 0.3
+                }
+            },
+            "upstream": [
+                "Answer:PoorMapsCover"
+            ]
+        },
+        "Wikipedia:WittyRiceLearn": {
+            "downstream": [
+                "Generate:ItchyRiversDrum"
+            ],
+            "obj": {
+                "component_name": "Wikipedia",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "debug_inputs": [],
+                    "inputs": [],
+                    "language": "en",
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "query": [
+                        {
+                            "component_id": "KeywordExtract:BeigeTipsStand",
+                            "type": "reference"
+                        }
+                    ],
+                    "top_n": 2
+                }
+            },
+            "upstream": [
+                "KeywordExtract:BeigeTipsStand"
+            ]
+        },
+        "begin": {
+            "downstream": [
+                "Answer:PoorMapsCover"
+            ],
+            "obj": {
+                "component_name": "Begin",
+                "inputs": [],
+                "output": null,
+                "params": {
+                    "debug_inputs": [],
+                    "inputs": [],
+                    "message_history_window_size": 22,
+                    "output": null,
+                    "output_var_name": "output",
+                    "prologue": "Hi! I'm your smart assistant. What can I do for you?",
+                    "query": []
+                }
+            },
+            "upstream": []
+        }
+    },
+    "embed_id": "",
+    "graph": {
+        "edges": [
+            {
+                "id": "reactflow__edge-begin-Answer:PoorMapsCoverc",
+                "markerEnd": "logo",
+                "source": "begin",
+                "sourceHandle": null,
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Answer:PoorMapsCover",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "reactflow__edge-Answer:PoorMapsCoverb-RewriteQuestion:OrangeBottlesSwimc",
+                "markerEnd": "logo",
+                "source": "Answer:PoorMapsCover",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "RewriteQuestion:OrangeBottlesSwim",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "reactflow__edge-RewriteQuestion:OrangeBottlesSwimb-KeywordExtract:BeigeTipsStandc",
+                "markerEnd": "logo",
+                "source": "RewriteQuestion:OrangeBottlesSwim",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "KeywordExtract:BeigeTipsStand",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "reactflow__edge-KeywordExtract:BeigeTipsStandb-Baidu:OliveAreasCallc",
+                "markerEnd": "logo",
+                "source": "KeywordExtract:BeigeTipsStand",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Baidu:OliveAreasCall",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "reactflow__edge-KeywordExtract:BeigeTipsStandb-DuckDuckGo:SoftButtonsRefusec",
+                "markerEnd": "logo",
+                "source": "KeywordExtract:BeigeTipsStand",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "DuckDuckGo:SoftButtonsRefuse",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "reactflow__edge-KeywordExtract:BeigeTipsStandb-Wikipedia:WittyRiceLearnc",
+                "markerEnd": "logo",
+                "source": "KeywordExtract:BeigeTipsStand",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Wikipedia:WittyRiceLearn",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "reactflow__edge-RewriteQuestion:OrangeBottlesSwimb-Retrieval:SilentCamelsStickc",
+                "markerEnd": "logo",
+                "source": "RewriteQuestion:OrangeBottlesSwim",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Retrieval:SilentCamelsStick",
+                "targetHandle": "c",
+                "type": "buttonEdge"
+            },
+            {
+                "id": "xy-edge__Generate:ItchyRiversDrumc-Answer:PoorMapsCoverc",
+                "markerEnd": "logo",
+                "source": "Generate:ItchyRiversDrum",
+                "sourceHandle": "c",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Answer:PoorMapsCover",
+                "targetHandle": "c",
+                "type": "buttonEdge",
+                "zIndex": 1001
+            },
+            {
+                "id": "xy-edge__Retrieval:SilentCamelsStickb-Generate:ItchyRiversDrumb",
+                "markerEnd": "logo",
+                "source": "Retrieval:SilentCamelsStick",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Generate:ItchyRiversDrum",
+                "targetHandle": "b",
+                "type": "buttonEdge",
+                "zIndex": 1001
+            },
+            {
+                "id": "xy-edge__Wikipedia:WittyRiceLearnb-Generate:ItchyRiversDrumb",
+                "markerEnd": "logo",
+                "source": "Wikipedia:WittyRiceLearn",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Generate:ItchyRiversDrum",
+                "targetHandle": "b",
+                "type": "buttonEdge",
+                "zIndex": 1001
+            },
+            {
+                "id": "xy-edge__Baidu:OliveAreasCallb-Generate:ItchyRiversDrumb",
+                "markerEnd": "logo",
+                "source": "Baidu:OliveAreasCall",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Generate:ItchyRiversDrum",
+                "targetHandle": "b",
+                "type": "buttonEdge",
+                "zIndex": 1001
+            },
+            {
+                "id": "xy-edge__DuckDuckGo:SoftButtonsRefuseb-Generate:ItchyRiversDrumb",
+                "markerEnd": "logo",
+                "source": "DuckDuckGo:SoftButtonsRefuse",
+                "sourceHandle": "b",
+                "style": {
+                    "stroke": "rgb(202 197 245)",
+                    "strokeWidth": 2
+                },
+                "target": "Generate:ItchyRiversDrum",
+                "targetHandle": "b",
+                "type": "buttonEdge",
+                "zIndex": 1001
+            }
+        ],
+        "nodes": [
+            {
+                "data": {
+                    "label": "Begin",
+                    "name": "opening"
+                },
+                "dragging": false,
+                "height": 44,
+                "id": "begin",
+                "measured": {
+                    "height": 44,
+                    "width": 100
+                },
+                "position": {
+                    "x": -1469.1118402678153,
+                    "y": -138.55389910599428
+                },
+                "positionAbsolute": {
+                    "x": -1379.627471412851,
+                    "y": -135.63593055637585
+                },
+                "selected": false,
+                "sourcePosition": "left",
+                "targetPosition": "right",
+                "type": "beginNode"
+            },
+            {
+                "data": {
+                    "form": {},
+                    "label": "Answer",
+                    "name": "interface"
+                },
+                "dragging": false,
+                "height": 44,
+                "id": "Answer:PoorMapsCover",
+                "measured": {
+                    "height": 44,
+                    "width": 200
+                },
+                "position": {
+                    "x": -1172.8677760724227,
+                    "y": -134.7856818291531
+                },
+                "positionAbsolute": {
+                    "x": -1172.8677760724227,
+                    "y": -134.7856818291531
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "logicNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "language": "en",
+                        "query": [
+                            {
+                                "component_id": "KeywordExtract:BeigeTipsStand",
+                                "type": "reference"
+                            }
+                        ],
+                        "top_n": 2
+                    },
+                    "label": "Wikipedia",
+                    "name": "Wikipedia"
+                },
+                "dragging": false,
+                "height": 44,
+                "id": "Wikipedia:WittyRiceLearn",
+                "measured": {
+                    "height": 44,
+                    "width": 200
+                },
+                "position": {
+                    "x": -406.9217458441634,
+                    "y": -54.01023495053805
+                },
+                "positionAbsolute": {
+                    "x": -406.9217458441634,
+                    "y": -54.01023495053805
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "ragNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "query": [
+                            {
+                                "component_id": "KeywordExtract:BeigeTipsStand",
+                                "type": "reference"
+                            }
+                        ],
+                        "top_n": 2
+                    },
+                    "label": "Baidu",
+                    "name": "Baidu"
+                },
+                "dragging": false,
+                "height": 44,
+                "id": "Baidu:OliveAreasCall",
+                "measured": {
+                    "height": 44,
+                    "width": 200
+                },
+                "position": {
+                    "x": -334.8102520664264,
+                    "y": -142.4206828864257
+                },
+                "positionAbsolute": {
+                    "x": -334.8102520664264,
+                    "y": -142.4206828864257
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "ragNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "channel": "text",
+                        "query": [
+                            {
+                                "component_id": "KeywordExtract:BeigeTipsStand",
+                                "type": "reference"
+                            }
+                        ],
+                        "top_n": 2
+                    },
+                    "label": "DuckDuckGo",
+                    "name": "DuckDuckGo"
+                },
+                "dragging": false,
+                "height": 44,
+                "id": "DuckDuckGo:SoftButtonsRefuse",
+                "measured": {
+                    "height": 44,
+                    "width": 200
+                },
+                "position": {
+                    "x": -241.42135935727495,
+                    "y": -227.69429585279033
+                },
+                "positionAbsolute": {
+                    "x": -241.42135935727495,
+                    "y": -227.69429585279033
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "ragNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "frequencyPenaltyEnabled": true,
+                        "frequency_penalty": 0.7,
+                        "llm_id": "deepseek-chat@DeepSeek",
+                        "loop": 1,
+                        "maxTokensEnabled": true,
+                        "max_tokens": 256,
+                        "message_history_window_size": 6,
+                        "parameter": "Precise",
+                        "presencePenaltyEnabled": true,
+                        "presence_penalty": 0.4,
+                        "temperature": 0.1,
+                        "temperatureEnabled": true,
+                        "topPEnabled": true,
+                        "top_p": 0.3
+                    },
+                    "label": "RewriteQuestion",
+                    "name": "Refine Question"
+                },
+                "dragging": false,
+                "height": 86,
+                "id": "RewriteQuestion:OrangeBottlesSwim",
+                "measured": {
+                    "height": 86,
+                    "width": 200
+                },
+                "position": {
+                    "x": -926.3250837910092,
+                    "y": -156.41315582042822
+                },
+                "positionAbsolute": {
+                    "x": -926.3250837910092,
+                    "y": -156.41315582042822
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "rewriteNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "frequencyPenaltyEnabled": true,
+                        "frequency_penalty": 0.7,
+                        "llm_id": "deepseek-chat@DeepSeek",
+                        "maxTokensEnabled": true,
+                        "max_tokens": 256,
+                        "parameter": "Precise",
+                        "presencePenaltyEnabled": true,
+                        "presence_penalty": 0.4,
+                        "temperature": 0.1,
+                        "temperatureEnabled": true,
+                        "topPEnabled": true,
+                        "top_n": 2,
+                        "top_p": 0.3
+                    },
+                    "label": "KeywordExtract",
+                    "name": "Get keywords"
+                },
+                "dragging": false,
+                "height": 86,
+                "id": "KeywordExtract:BeigeTipsStand",
+                "measured": {
+                    "height": 86,
+                    "width": 200
+                },
+                "position": {
+                    "x": -643.95039088561,
+                    "y": -160.37167955274685
+                },
+                "positionAbsolute": {
+                    "x": -643.95039088561,
+                    "y": -160.37167955274685
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "keywordNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "empty_response": "The answer you want was not found in the knowledge base!",
+                        "kb_ids": [],
+                        "keywords_similarity_weight": 0.3,
+                        "similarity_threshold": 0.2,
+                        "top_n": 8
+                    },
+                    "label": "Retrieval",
+                    "name": "Search KB"
+                },
+                "dragging": false,
+                "height": 46,
+                "id": "Retrieval:SilentCamelsStick",
+                "measured": {
+                    "height": 46,
+                    "width": 200
+                },
+                "position": {
+                    "x": -641.3113750640641,
+                    "y": -4.669746081545384
+                },
+                "positionAbsolute": {
+                    "x": -641.3113750640641,
+                    "y": -4.669746081545384
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "retrievalNode",
+                "width": 200
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "The large model answers the user's query based on the content retrieved from different search engines and knowledge bases, returning an answer to the user's question."
+                    },
+                    "label": "Note",
+                    "name": "N: LLM"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 144,
+                "id": "Note:CuteSchoolsWear",
+                "measured": {
+                    "height": 144,
+                    "width": 443
+                },
+                "position": {
+                    "x": -628.5256394373041,
+                    "y": 412.60472782016245
+                },
+                "positionAbsolute": {
+                    "x": -628.5256394373041,
+                    "y": 412.60472782016245
+                },
+                "resizing": false,
+                "selected": false,
+                "sourcePosition": "right",
+                "style": {
+                    "height": 144,
+                    "width": 443
+                },
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 443
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "Complete questions by conversation history.\nUser: What's RAGFlow?\nAssistant: RAGFlow is xxx.\nUser: How to deloy it?\n\nRefine it: How to deploy RAGFlow?"
+                    },
+                    "label": "Note",
+                    "name": "N: Refine question"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 209,
+                "id": "Note:CuteRavensBehave",
+                "measured": {
+                    "height": 209,
+                    "width": 266
+                },
+                "position": {
+                    "x": -921.2271023677847,
+                    "y": -381.3182401779728
+                },
+                "positionAbsolute": {
+                    "x": -921.2271023677847,
+                    "y": -381.3182401779728
+                },
+                "resizing": false,
+                "selected": false,
+                "sourcePosition": "right",
+                "style": {
+                    "height": 209,
+                    "width": 266
+                },
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 266
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "Based on the user's question, searches the knowledge base and returns the retrieved content."
+                    },
+                    "label": "Note",
+                    "name": "N: Search KB"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 128,
+                "id": "Note:RudeRulesLeave",
+                "measured": {
+                    "height": 128,
+                    "width": 269
+                },
+                "position": {
+                    "x": -917.896611693436,
+                    "y": -3.570404025438563
+                },
+                "positionAbsolute": {
+                    "x": -917.896611693436,
+                    "y": -3.570404025438563
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 269
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "Based on the keywords, searches on Wikipedia and returns the found content."
+                    },
+                    "label": "Note",
+                    "name": "N: Wikipedia"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 128,
+                "id": "Note:DryActorsTry",
+                "measured": {
+                    "height": 128,
+                    "width": 281
+                },
+                "position": {
+                    "x": 49.68127281474659,
+                    "y": -16.899164744846445
+                },
+                "positionAbsolute": {
+                    "x": 49.68127281474659,
+                    "y": -16.899164744846445
+                },
+                "resizing": false,
+                "selected": false,
+                "sourcePosition": "right",
+                "style": {
+                    "height": 128,
+                    "width": 281
+                },
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 281
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "Based on the keywords, searches on Baidu and returns the found content."
+                    },
+                    "label": "Note",
+                    "name": "N :Baidu"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 128,
+                "id": "Note:HonestShirtsNail",
+                "measured": {
+                    "height": 128,
+                    "width": 269
+                },
+                "position": {
+                    "x": 43.964372149616565,
+                    "y": -151.26282396084338
+                },
+                "positionAbsolute": {
+                    "x": 43.964372149616565,
+                    "y": -151.26282396084338
+                },
+                "selected": false,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 269
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "Based on the keywords, searches on DuckDuckGo and returns the found content."
+                    },
+                    "label": "Note",
+                    "name": "N: DuckduckGo"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 145,
+                "id": "Note:OddBreadsFix",
+                "measured": {
+                    "height": 145,
+                    "width": 201
+                },
+                "position": {
+                    "x": -237.54626926201882,
+                    "y": -381.56637252684175
+                },
+                "positionAbsolute": {
+                    "x": -237.54626926201882,
+                    "y": -381.56637252684175
+                },
+                "resizing": false,
+                "selected": false,
+                "sourcePosition": "right",
+                "style": {
+                    "height": 145,
+                    "width": 201
+                },
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 201
+            },
+            {
+                "data": {
+                    "form": {
+                        "text": "The large model generates keywords based on the user's question for better retrieval."
+                    },
+                    "label": "Note",
+                    "name": "N: Get keywords"
+                },
+                "dragHandle": ".note-drag-handle",
+                "dragging": false,
+                "height": 162,
+                "id": "Note:GentleWorldsDesign",
+                "measured": {
+                    "height": 162,
+                    "width": 201
+                },
+                "position": {
+                    "x": -646.3211655055846,
+                    "y": -334.10598887579624
+                },
+                "positionAbsolute": {
+                    "x": -646.3211655055846,
+                    "y": -334.10598887579624
+                },
+                "resizing": false,
+                "selected": false,
+                "sourcePosition": "right",
+                "style": {
+                    "height": 162,
+                    "width": 201
+                },
+                "targetPosition": "left",
+                "type": "noteNode",
+                "width": 201
+            },
+            {
+                "data": {
+                    "form": {
+                        "cite": true,
+                        "frequencyPenaltyEnabled": true,
+                        "frequency_penalty": 0.7,
+                        "llm_id": "deepseek-chat@DeepSeek",
+                        "maxTokensEnabled": false,
+                        "max_tokens": 256,
+                        "message_history_window_size": 12,
+                        "parameter": "Precise",
+                        "parameters": [],
+                        "presencePenaltyEnabled": true,
+                        "presence_penalty": 0.4,
+                        "prompt": "Role: You are an intelligent assistant. \nTask: Chat with user. Answer the question based on the provided content from: Knowledge Base, Wikipedia, Duckduckgo, Baidu.\nRequirements:\n  - Answer should be in markdown format.\n - Answer should include all sources(Knowledge Base, Wikipedia, Duckduckgo, Baidu) as long as they are relevant, and label the sources of the cited content separately.\n  - Attach URL links to the content which is quoted from Wikipedia, DuckDuckGo or Baidu.\n  - Do not make thing up when there's no relevant information to user's question. \n\n## Knowledge base content\n{Retrieval:SilentCamelsStick}\n\n\n## Wikipedia content\n{Wikipedia:WittyRiceLearn}\n\n\n## Duckduckgo content\n{DuckDuckGo:SoftButtonsRefuse}\n\n\n## Baidu content\n{Baidu:OliveAreasCall}\n\n",
+                        "temperature": 0.1,
+                        "temperatureEnabled": true,
+                        "topPEnabled": true,
+                        "top_p": 0.3
+                    },
+                    "label": "Generate",
+                    "name": "LLM"
+                },
+                "dragging": false,
+                "id": "Generate:ItchyRiversDrum",
+                "measured": {
+                    "height": 108,
+                    "width": 200
+                },
+                "position": {
+                    "x": -636.2454246475879,
+                    "y": 282.00479262604443
+                },
+                "selected": true,
+                "sourcePosition": "right",
+                "targetPosition": "left",
+                "type": "generateNode"
+            }
+        ]
+    },
+    "history": [],
+    "messages": [],
+    "path": [],
+    "reference": []
+}

@@ -1,0 +1,168 @@
+{"graph": {
+    "nodes": [
+        {
+            "data": {
+                "label": "Begin",
+                "name": "begin"
+            },
+            "dragging": false,
+            "id": "begin",
+            "measured": {
+                "height": 44,
+                "width": 200
+            },
+            "position": {
+                "x": -917.49918189222,
+                "y": 287.90185876249694
+            },
+            "selected": false,
+            "sourcePosition": "left",
+            "targetPosition": "right",
+            "type": "beginNode"
+        },
+        {
+            "data": {
+                "form": {},
+                "label": "Answer",
+                "name": "Interact_0"
+            },
+            "dragging": false,
+            "id": "Answer:StaleResultsHelp",
+            "measured": {
+                "height": 44,
+                "width": 200
+            },
+            "position": {
+                "x": -564.8621908226633,
+                "y": 291.8800985123621
+            },
+            "selected": false,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "type": "logicNode"
+        },
+        {
+            "data": {
+                "form": {
+                    "cite": true,
+                    "frequencyPenaltyEnabled": true,
+                    "frequency_penalty": 0.7,
+                    "llm_id": "gpt-4@OpenAI",
+                    "maxTokensEnabled": false,
+                    "max_tokens": 256,
+                    "message_history_window_size": 12,
+                    "parameters": [],
+                    "presencePenaltyEnabled": true,
+                    "presence_penalty": 0.4,
+                    "prompt": " {Retrieval:FineEyesBrush} \ub0b4\uc6a9\uc744 \uae30\ubc18\uc73c\ub85c  {Answer:StaleResultsHelp} \uc5d0 \ub2f5\ud574\uc918",
+                    "temperature": 0.1,
+                    "temperatureEnabled": true,
+                    "topPEnabled": true,
+                    "top_p": 0.3
+                },
+                "label": "Generate",
+                "name": "Generate_0"
+            },
+            "id": "Generate:ChillySquidsJoke",
+            "measured": {
+                "height": 104,
+                "width": 200
+            },
+            "position": {
+                "x": -675,
+                "y": 615
+            },
+            "selected": true,
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "type": "generateNode"
+        },
+        {
+            "id": "Retrieval:FineEyesBrush",
+            "type": "retrievalNode",
+            "position": {
+                "x": -285,
+                "y": 435
+            },
+            "data": {
+                "label": "Retrieval",
+                "name": "Retrieval_0",
+                "form": {
+                    "similarity_threshold": 0.2,
+                    "keywords_similarity_weight": 0.3,
+                    "top_n": 8,
+                    "use_kg": false,
+                    "query": [],
+                    "kb_ids": [
+                        "acacbb264cd111f0aad90242ac180006"
+                    ]
+                }
+            },
+            "sourcePosition": "right",
+            "targetPosition": "left",
+            "measured": {
+                "width": 200,
+                "height": 106
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "id": "xy-edge__begin-Answer:StaleResultsHelpc",
+            "markerEnd": "logo",
+            "source": "begin",
+            "style": {
+                "stroke": "rgb(202 197 245)",
+                "strokeWidth": 2
+            },
+            "target": "Answer:StaleResultsHelp",
+            "targetHandle": "c",
+            "type": "buttonEdge",
+            "zIndex": 1001
+        },
+        {
+            "id": "xy-edge__Generate:ChillySquidsJokec-Answer:StaleResultsHelpc",
+            "markerEnd": "logo",
+            "source": "Generate:ChillySquidsJoke",
+            "sourceHandle": "c",
+            "style": {
+                "stroke": "rgb(202 197 245)",
+                "strokeWidth": 2
+            },
+            "target": "Answer:StaleResultsHelp",
+            "targetHandle": "c",
+            "type": "buttonEdge",
+            "zIndex": 1001
+        },
+        {
+            "type": "buttonEdge",
+            "markerEnd": "logo",
+            "style": {
+                "strokeWidth": 2,
+                "stroke": "rgb(202 197 245)"
+            },
+            "zIndex": 1001,
+            "source": "Answer:StaleResultsHelp",
+            "sourceHandle": "b",
+            "target": "Retrieval:FineEyesBrush",
+            "targetHandle": "c",
+            "id": "xy-edge__Answer:StaleResultsHelpb-Retrieval:FineEyesBrushc"
+        },
+        {
+            "type": "buttonEdge",
+            "markerEnd": "logo",
+            "style": {
+                "strokeWidth": 2,
+                "stroke": "rgb(202 197 245)"
+            },
+            "zIndex": 1001,
+            "source": "Retrieval:FineEyesBrush",
+            "sourceHandle": "b",
+            "target": "Generate:ChillySquidsJoke",
+            "targetHandle": "b",
+            "id": "xy-edge__Retrieval:FineEyesBrushb-Generate:ChillySquidsJokeb"
+        }
+    ]
+}
