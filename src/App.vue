@@ -1,17 +1,26 @@
 <template>
-  <BasicFlow />
-  <div class = "contaier">
-    <h1>👋 안녕하세요 {{ name }}님!</h1>
+  <div class="container">
+    <HelloUser :name="name" />
     <input v-model="name" placeholder="이름을 입력하세요" />
+  </div>
+
+    <div class="container">
+    <HelloUser :company="company" />
+    <input v-model="company" placeholder="화서 입력하세요" />
+  </div>
+
+    <div class="container">
+    <BasicFlow />
   </div>
 </template>
 
 <script setup>
 import BasicFlow from './components/BasicFlow.vue'
+import HelloUser from './components/HelloUser.vue'
+import { ref } from 'vue'
 
-
-import {ref} from 'vue'
 const name = ref('홍길동')
+const company = ref('아시아나')
 
 </script>
 
