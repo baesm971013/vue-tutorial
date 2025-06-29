@@ -3,6 +3,8 @@
     <div class='form'>
       <input v-model="name" placeholder="이름을 입력하세요" />
       <input v-model="company" placeholder="회사명을 입력하세요" />
+      <input v-model="email" placeholder="email 입력하세요" />
+
       <button @click="addUser">➕ 사용자 추가</button>
     </div>
     
@@ -12,6 +14,7 @@
         :key="index"
         :name="user.name"
         :company="user.company"
+        :email="user.email"
       />
     </div>
   </div>
@@ -31,15 +34,18 @@ import UserCard from './components/UserCard.vue'
 const name = ref('')
 const company = ref('')
 const users = ref([])
+const email = ref('')
 
 function addUser(){
   if (name.value.trim() && company.value.trim()) {
     users.value.push({
       name: name.value,
-      company: company.value
+      company: company.value,
+      email: email.value
     })
     name.value = ''
     company.value = ''
+    email.value = ''
   } else {
     alert('이름과 회사를 모두 입력해주세요!')
   }
